@@ -1,0 +1,38 @@
+# PromptScan configuration example
+# Place as .promptscan.yml in your project root
+
+scan:
+  recursive: true
+  threshold: 80
+  extensions:
+    - .md
+    - .yaml
+    - .yml
+    - .json
+    - .txt
+    - .html
+    - .xml
+    - .toml
+    - .env
+    - .cfg
+    - .ini
+    - .conf
+
+  # Paths to exclude from scanning
+  exclude:
+    - node_modules/
+    - .git/
+    - vendor/
+    - dist/
+
+  # Maximum file size in bytes (default: 10MB)
+  max_file_size: 10485760
+
+# Signature file location
+sigfile: signatures/default.pgsig
+
+# Output settings
+output:
+  format: console  # console or json
+  quiet: false     # hide clean files
+  verbose: false   # debug logging
