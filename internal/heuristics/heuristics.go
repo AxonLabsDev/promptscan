@@ -6,6 +6,7 @@ package heuristics
 import (
 	"math"
 	"regexp"
+	"strconv"
 	"strings"
 	"unicode"
 
@@ -303,25 +304,5 @@ func formatFloat(rule string, val float64) string {
 }
 
 func itoa(n int) string {
-	if n == 0 {
-		return "0"
-	}
-	neg := false
-	if n < 0 {
-		neg = true
-		n = -n
-	}
-	digits := make([]byte, 0, 10)
-	for n > 0 {
-		digits = append(digits, byte('0'+n%10))
-		n /= 10
-	}
-	if neg {
-		digits = append(digits, '-')
-	}
-	// Reverse.
-	for i, j := 0, len(digits)-1; i < j; i, j = i+1, j-1 {
-		digits[i], digits[j] = digits[j], digits[i]
-	}
-	return string(digits)
+	return strconv.Itoa(n)
 }
