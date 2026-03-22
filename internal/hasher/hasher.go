@@ -65,10 +65,14 @@ func NGrams(text string, n int) []string {
 	return grams
 }
 
-// MultiSizeNGrams generates n-grams of sizes 3, 4, and 5.
+// DefaultNGramSizes are the n-gram sizes used for detection.
+// Larger n-grams reduce false positives on common phrases.
+var DefaultNGramSizes = []int{4, 5, 6}
+
+// MultiSizeNGrams generates n-grams of multiple sizes.
 func MultiSizeNGrams(text string) []string {
 	var all []string
-	for _, size := range []int{3, 4, 5} {
+	for _, size := range DefaultNGramSizes {
 		all = append(all, NGrams(text, size)...)
 	}
 	return all

@@ -65,10 +65,10 @@ func imperativeRatio(content string) []Finding {
 		return nil
 	}
 
-	score := ratio * 2.0 // max 2.0
+	score := ratio * 5.0 // max 5.0
 	return []Finding{{
 		Rule:   "imperative_ratio",
-		Score:  math.Min(score, 2.0),
+		Score:  math.Min(score, 5.0),
 		Detail: formatFloat("imperative_ratio", ratio),
 	}}
 }
@@ -138,7 +138,7 @@ func roleReassignment(content string) []Finding {
 	if matches := roleAssignRe.FindAllString(content, -1); len(matches) > 0 {
 		findings = append(findings, Finding{
 			Rule:   "role_reassignment",
-			Score:  1.5,
+			Score:  5.0,
 			Detail: formatDetail("role_assign_structure", len(matches)),
 		})
 	}
@@ -150,7 +150,7 @@ func roleReassignment(content string) []Finding {
 	directives += len(sectionMarkerRe.FindAllString(content, -1))
 
 	if directives > 0 {
-		score := math.Min(float64(directives)*0.8, 2.0)
+		score := math.Min(float64(directives)*3.0, 10.0)
 		findings = append(findings, Finding{
 			Rule:   "role_reassignment",
 			Score:  score,
@@ -181,7 +181,7 @@ func encodingDetection(content string, fileName string) []Finding {
 	if len(b64Matches) > 0 {
 		findings = append(findings, Finding{
 			Rule:   "encoding_detected",
-			Score:  1.0,
+			Score:  3.0,
 			Detail: formatDetail("base64_blocks", len(b64Matches)),
 		})
 	}
@@ -221,7 +221,7 @@ func encodingDetection(content string, fileName string) []Finding {
 	if zwCount > 0 {
 		findings = append(findings, Finding{
 			Rule:   "encoding_detected",
-			Score:  1.5,
+			Score:  5.0,
 			Detail: formatDetail("zero_width_chars", zwCount),
 		})
 	}
@@ -274,7 +274,7 @@ func registerBreak(content string) []Finding {
 		return nil
 	}
 
-	score := math.Min(maxTransitionScore, 1.5)
+	score := math.Min(maxTransitionScore*8.0, 8.0)
 	return []Finding{{
 		Rule:   "register_break",
 		Score:  score,

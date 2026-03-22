@@ -106,9 +106,9 @@ func TestNGrams(t *testing.T) {
 func TestMultiSizeNGrams(t *testing.T) {
 	text := "one two three four five six"
 	grams := MultiSizeNGrams(text)
-	// 6 words: 4 trigrams + 3 four-grams + 2 five-grams = 9
-	if len(grams) != 9 {
-		t.Errorf("expected 9 multi-size n-grams, got %d", len(grams))
+	// 6 words with n-gram sizes {4,5,6}: 3 four-grams + 2 five-grams + 1 six-gram = 6
+	if len(grams) != 6 {
+		t.Errorf("expected 6 multi-size n-grams, got %d", len(grams))
 	}
 }
 

@@ -209,38 +209,33 @@ func (s *Scanner) scanFile(path string) reporter.FileResult {
 		}
 	}
 
-	// Level 2: Hash matching (only if bloom says possible hit).
+	// Level 2: Hash matching on WHOLE LINES only (no n-grams — too many false positives).
+	// A whole-line match means an exact known-bad phrase was found.
 	if bloomHit {
 		hashMatches := 0
-		// Check line-level hashes.
 		lines := strings.Split(decoded.Content, "\n")
 		for lineIdx, line := range lines {
 			normalized := hasher.Normalize(line)
 			if normalized == "" {
 				continue
 			}
-			h := hasher.SaltedHash(line, salt)
+			h := hasher.SaltedHash(normalized, salt)
 			if s.sig.LookupHash(h) {
 				hashMatches++
 				if result.Line == 0 {
 					result.Line = lineIdx + 1
 				}
 			}
-			// Also check n-grams of each line.
-			lineGrams := hasher.MultiSizeNGrams(line)
-			for _, ng := range lineGrams {
-				h := hasher.SaltedHash(ng, salt)
-				if s.sig.LookupHash(h) {
-					hashMatches++
-					if result.Line == 0 {
-						result.Line = lineIdx + 1
-					}
-				}
-			}
 		}
 
 		if hashMatches > 0 {
-			score += float64(hashMatches) * 3.0
+			// Whole-line matches are highly significant (exact known-bad).
+			// Cap at 40 to prevent large files from dominating.
+			hashScore := float64(hashMatches) * 10.0
+			if hashScore > 40.0 {
+				hashScore = 40.0
+			}
+			score += hashScore
 			findings = append(findings, formatHashMatch(hashMatches))
 		}
 	}

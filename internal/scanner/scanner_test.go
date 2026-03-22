@@ -29,13 +29,13 @@ func buildTestSigFile() *sigfile.SigFile {
 	var hashes [][]byte
 
 	for _, p := range testPatterns {
+		// Bloom filter uses n-grams for pre-screening.
 		ngrams := hasher.MultiSizeNGrams(p)
 		for _, ng := range ngrams {
 			h := hasher.SaltedHash(ng, salt[:])
 			bf.Add(h)
-			hashes = append(hashes, h)
 		}
-		// Also add line-level hash.
+		// Hash table stores only whole-line hashes (Level 2 matches these).
 		lh := hasher.SaltedHash(p, salt[:])
 		bf.Add(lh)
 		hashes = append(hashes, lh)

@@ -108,16 +108,15 @@ func main() {
 	totalNgrams := 0
 
 	for _, pattern := range patterns {
-		// Generate multi-size n-grams (3, 4, 5 words).
+		// N-grams go into bloom filter only (pre-screening).
 		ngrams := hasher.MultiSizeNGrams(pattern)
 		for _, ng := range ngrams {
 			h := hasher.SaltedHash(ng, salt[:])
 			bf.Add(h)
-			allHashes = append(allHashes, h)
 			totalNgrams++
 		}
 
-		// Also add the full line hash.
+		// Whole-line hash goes into both bloom filter AND hash table (Level 2 matching).
 		lineHash := hasher.SaltedHash(pattern, salt[:])
 		bf.Add(lineHash)
 		allHashes = append(allHashes, lineHash)
