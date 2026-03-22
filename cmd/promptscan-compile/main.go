@@ -2,7 +2,8 @@
 // from a private pattern list. This tool is NOT distributed publicly.
 //
 // Usage:
-//   promptscan-compile -i patterns.txt -o output.pgsig [-k hmac-key] [-s salt]
+//
+//	promptscan-compile -i patterns.txt -o output.pgsig [-k hmac-key] [-s salt]
 //
 // The input file contains one detection pattern per line (clear text).
 // The output is a binary .pgsig file containing only hashes and a bloom filter.

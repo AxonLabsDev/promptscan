@@ -2,9 +2,10 @@
 // Scans text files for suspicious content before AI agents read them.
 //
 // Usage:
-//   promptscan scan <path> [flags]
-//   promptscan verify <sigfile>
-//   promptscan version
+//
+//	promptscan scan <path> [flags]
+//	promptscan verify <sigfile>
+//	promptscan version
 package main
 
 import (

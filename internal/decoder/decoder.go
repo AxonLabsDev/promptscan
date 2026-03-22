@@ -27,13 +27,13 @@ var (
 
 // Result holds the decoded content and metadata about what was found.
 type Result struct {
-	Content            string
-	HasBase64          bool
-	HasUnicodeEscapes  bool
-	HasZeroWidthChars  bool
-	HasHTMLEntities    bool
-	Base64Decoded      []string // successfully decoded base64 segments
-	ObfuscationScore   float64  // 0.0-1.0 indicating level of obfuscation
+	Content           string
+	HasBase64         bool
+	HasUnicodeEscapes bool
+	HasZeroWidthChars bool
+	HasHTMLEntities   bool
+	Base64Decoded     []string // successfully decoded base64 segments
+	ObfuscationScore  float64  // 0.0-1.0 indicating level of obfuscation
 }
 
 // Decode applies all decoding layers to the input text.

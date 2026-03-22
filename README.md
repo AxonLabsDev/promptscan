@@ -32,7 +32,6 @@ make install   # copies to /usr/local/bin/
 **Or with Go:**
 
 ```bash
-# Once published on GitHub:
 go install github.com/AxonLabsDev/promptscan/cmd/promptscan@latest
 ```
 

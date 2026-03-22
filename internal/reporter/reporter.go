@@ -48,12 +48,12 @@ type FileResult struct {
 
 // ScanReport aggregates all file results.
 type ScanReport struct {
-	Version    string       `json:"version"`
-	ScannedAt  time.Time    `json:"scanned_at"`
-	TotalFiles int          `json:"total_files"`
+	Version    string        `json:"version"`
+	ScannedAt  time.Time     `json:"scanned_at"`
+	TotalFiles int           `json:"total_files"`
 	Duration   time.Duration `json:"duration"`
-	Threshold  float64      `json:"threshold"`
-	Results    []FileResult `json:"results"`
+	Threshold  float64       `json:"threshold"`
+	Results    []FileResult  `json:"results"`
 }
 
 // Classify determines severity based on score and threshold.

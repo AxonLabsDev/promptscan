@@ -36,11 +36,11 @@ var SupportedExtensions = map[string]bool{
 
 // Config holds scanner configuration.
 type Config struct {
-	Recursive      bool
-	Threshold      float64
-	Verbose        bool
-	MaxFileSize    int64 // bytes, default 10MB
-	Workers        int
+	Recursive   bool
+	Threshold   float64
+	Verbose     bool
+	MaxFileSize int64 // bytes, default 10MB
+	Workers     int
 }
 
 // DefaultConfig returns reasonable default configuration.

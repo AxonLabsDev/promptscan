@@ -38,10 +38,10 @@ type Header struct {
 
 // SigFile represents a loaded signature database.
 type SigFile struct {
-	Header     Header
-	BloomData  []byte
-	HashTable  [][]byte // sorted SHA-256 hashes
-	HMACKey    []byte   // derived from salt for verification
+	Header    Header
+	BloomData []byte
+	HashTable [][]byte // sorted SHA-256 hashes
+	HMACKey   []byte   // derived from salt for verification
 }
 
 // New creates a new SigFile with the given parameters.
